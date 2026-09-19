@@ -1,0 +1,6 @@
+{
+  "name": "NAGAR-X Ahmedabad Civic Portal",
+  "description": "The official civic bridge for citizens of Ahmedabad to report issues, connect with neighbors, and collaborate with the AMC for a cleaner, safer city.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "Registered citizens and civic officials profiles",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "phone": { "type": "string" },
+        "wardNumber": { "type": "string" },
+        "wardName": { "type": "string" },
+        "city": { "type": "string" },
+        "role": { "type": "string", "enum": ["citizen", "official", "admin"] },
+        "civicPoints": { "type": "number" },
+        "ticketsReported": { "type": "number" },
+        "eventsJoined": { "type": "number" },
+        "bio": { "type": "string" },
+        "preferredLanguage": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName"]
+    },
+    "tickets": {
+      "title": "Tickets",
+      "description": "Civic issues reported by citizens",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "ward": { "type": "string" },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Reported", "In-Progress", "Resolved"] },
+        "upvotes": { "type": "number" },
+        "authorUid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "isAnonymous": { "type": "boolean" },
+        "imageUrl": { "type": "string" },
+        "voiceTranscript": { "type": "string" },
+        "isResolved": { "type": "boolean" },
+        "resolvedByOfficer": { "type": "string" },
+        "officerDesignation": { "type": "string" },
+        "officerSquad": { "type": "string" },
+        "officerWard": { "type": "string" },
+        "resolutionRemarks": { "type": "string" },
+        "resolutionProofUrl": { "type": "string" },
+        "afterImageUrl": { "type": "string" },
+        "resolutionTime": { "type": "string" },
+        "resolvedTimestamp": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "ward", "description"]
+    },
+    "events": {
+      "title": "Events",
+      "description": "Civic community drives and volunteering events",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "dateTime": { "type": "string" },
+        "location": { "type": "string" },
+        "assemblyPoint": { "type": "string" },
+        "ward": { "type": "string" },
+        "category": { "type": "string", "enum": ["all", "cleanliness", "repair", "plantation", "townhall"] },
+        "categoryLabel": { "type": "string" },
+        "description": { "type": "string" },
+        "organizer": { "type": "string" },
+        "volunteersRegistered": { "type": "number" },
+        "authorUid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "ward", "category", "description", "location"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "Registered citizen and official profiles"
+    },
+    "/tickets/{ticketId}": {
+      "schema": "tickets",
+      "description": "Civic issues and complaints reported by citizens"
+    },
+    "/events/{eventId}": {
+      "schema": "events",
+      "description": "Civic drives, cleanups, tree plantations, and public townhall events"
+    }
+  }
+}

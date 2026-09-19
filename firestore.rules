@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // User Profiles
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update, delete: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Civic Tickets / Issues
+    match /tickets/{ticketId} {
+      allow read, create: if true;
+      allow update: if true;
+      allow delete: if request.auth != null && resource.data.authorUid == request.auth.uid;
+    }
+
+    // Community Events
+    match /events/{eventId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if request.auth != null;
+    }
+  }
+}
