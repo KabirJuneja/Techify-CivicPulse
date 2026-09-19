@@ -147,7 +147,8 @@ export default function AudioComplaintRecorder({
         const base64Audio = reader.result as string;
 
         try {
-          const response = await fetch('/api/audio/transcribe', {
+          const apiUrl = import.meta.env.VITE_API_URL || '';
+          const response = await fetch(`${apiUrl}/api/audio/transcribe`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

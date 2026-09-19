@@ -153,12 +153,14 @@ export default function ReportModal({
       const b64 = e.target?.result as string;
       if (b64) {
         try {
-          const resp = await fetch('/api/ai/analyze-evidence', {
+          const apiUrl = import.meta.env.VITE_API_URL || '';
+          const resp = await fetch(`${apiUrl}/api/ai/analyze-evidence`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              imageData: b64,
-              context: `Civic issue in ${formData.ward}, Ahmedabad`
+              imageBase64: b64,
+              landmark: formData.landmark || 'Ahmedabad',
+              ward: formData.ward || 'Navrangpura Ward #14'
             })
           });
           const res = await resp.json();

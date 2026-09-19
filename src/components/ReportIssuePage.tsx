@@ -145,12 +145,14 @@ export default function ReportIssuePage({ language, onSubmitSuccess, onCancel }:
     setIsAnalyzingPhoto(true);
 
     try {
-      const response = await fetch('/api/ai/analyze-evidence', {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/ai/analyze-evidence`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          imageData: dataUrl,
-          context: `Ahmedabad civic issue report at ${detectedWard}, ${landmark}`
+          imageBase64: dataUrl,
+          landmark: landmark || 'Ahmedabad Landmark',
+          ward: detectedWard || 'Navrangpura Ward #14'
         })
       });
 
